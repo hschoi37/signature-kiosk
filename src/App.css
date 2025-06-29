@@ -1,38 +1,482 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
+.signature-kiosk {
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #111827 0%, #000000 50%, #1f2937 100%);
+  color: white;
+  font-family: 'Arimo', sans-serif;
+  overflow: auto;
+  position: relative;
+  padding-bottom: 20px;
+}
+
+.signature-kiosk::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(ellipse at top, rgba(180, 83, 9, 0.2) 0%, transparent 50%);
   pointer-events: none;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
+  gap: 16px;
+}
+
+/* 헤더 */
+.header {
+  text-align: center;
+  padding: 12px 16px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  color: #D4AF37;
+  margin-bottom: 6px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+.divider {
+  width: 48px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #D4AF37, transparent);
+  margin: 0 auto 6px;
+}
+
+.subtitle {
+  color: #d1d5db;
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  font-weight: 300;
+}
+
+/* 도구 바 - 완전히 일렬로 배치 */
+.toolbar {
+  padding: 0 16px;
+}
+
+.tool-group {
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(16px);
+  border-radius: 12px;
+  padding: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  box-shadow: 0 10px 25px -12px rgba(0, 0, 0, 0.5);
+  
+  /* 모든 요소를 완전히 한 줄에 배치 */
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tool-label {
+  color: #d1d5db;
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  margin: 0 3px;
+}
+
+.pen-btn {
+  background: rgba(31, 41, 55, 0.8);
+  color: #d1d5db;
+  border: 1px solid #4b5563;
+  padding: 3px 5px;
+  border-radius: 5px;
+  font-size: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.pen-btn:hover {
+  background: #374151;
+}
+
+.pen-btn.active {
+  background: #D4AF37;
+  color: black;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.pen-icon {
+  font-size: 9px;
+}
+
+.stroke-btn {
+  width: 22px;
+  height: 22px;
+  background: rgba(31, 41, 55, 0.8);
+  border: 1px solid #4b5563;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.stroke-btn:hover {
+  background: #374151;
+}
+
+.stroke-btn.active {
+  background: #D4AF37;
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.stroke-indicator {
+  border-radius: 50%;
+  background: #9ca3af;
+}
+
+.stroke-indicator.active-indicator {
+  background: black;
+}
+
+.color-btn {
+  width: 22px;
+  height: 22px;
+  border: 2px solid #4b5563;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.color-btn:hover {
+  border-color: #9ca3af;
+}
+
+.color-btn.active {
+  border-color: white;
+  transform: scale(1.1);
+}
+
+/* 서명 캔버스 */
+.canvas-section {
+  padding: 0 16px;
+}
+
+.canvas-label {
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.canvas-label p {
+  color: #D4AF37;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+}
+
+.canvas-container {
+  position: relative;
+  width: 100%;
+  height: 180px;
+  background: white;
+  border: 3px solid #D4AF37;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.5);
+}
+
+.signature-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  cursor: crosshair;
+  background: white;
+  touch-action: none;
+}
+
+.canvas-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  background-image: radial-gradient(circle, rgba(212, 175, 55, 0.3) 1px, transparent 1px);
+  background-size: 25px 25px;
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.canvas-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  text-align: center;
+}
+
+.placeholder-main {
+  color: #6b7280;
+  font-size: 16px;
+  font-weight: 300;
+  margin-bottom: 3px;
+}
+
+.placeholder-sub {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.canvas-border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px solid #D4AF37;
+  border-radius: 12px;
+  opacity: 0.5;
+  pointer-events: none;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 0.8; }
+}
+
+/* 버튼 영역 */
+.button-section {
+  padding: 0 16px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.clear-btn {
+  background: rgba(31, 41, 55, 0.8);
   color: white;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 13px;
+  border: 1px solid #4b5563;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.App-link {
-  color: #61dafb;
+.clear-btn:hover {
+  background: rgba(55, 65, 81, 1);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.save-btn {
+  background: linear-gradient(to right, #f59e0b, #d97706);
+  color: black;
+  padding: 8px 12px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 13px;
+  border: none;
+  width: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(245, 158, 11, 0.25);
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+  background: linear-gradient(to right, #f3a916, #ea580c);
+}
+
+/* 최근 방문자 서명 */
+.signatures-section {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  border: 2px solid rgba(212, 175, 55, 0.4);
+  border-radius: 12px;
+  margin: 0 16px;
+  padding: 10px;
+}
+
+.signatures-title {
+  font-size: 14px;
+  font-weight: 300;
+  color: #D4AF37;
+  margin-bottom: 8px;
+  letter-spacing: 0.2em;
+  text-align: center;
+}
+
+.signatures-list {
+  display: flex;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 3px;
+}
+
+.signatures-list::-webkit-scrollbar {
+  display: none;
+}
+
+.signature-card {
+  flex-shrink: 0;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 6px;
+  padding: 6px;
+  min-width: 120px;
+  border: 2px solid rgba(212, 175, 55, 0.6);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.signature-card:hover {
+  transform: translateY(-1px);
+  border-color: rgba(212, 175, 55, 1);
+}
+
+.signature-image {
+  height: 30px;
+  background: #f3f4f6;
+  border-radius: 4px;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+}
+
+.signature-image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.signature-timestamp {
+  font-size: 9px;
+  color: #4b5563;
+  text-align: center;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+}
+
+.no-signatures {
+  width: 100%;
+  text-align: center;
+  padding: 8px;
+}
+
+.no-signatures p:first-child {
+  color: #9ca3af;
+  font-size: 12px;
+}
+
+.no-signatures p:last-child {
+  color: #6b7280;
+  font-size: 10px;
+  margin-top: 3px;
+}
+
+/* 반응형 처리 */
+@media (max-width: 768px) {
+  .title {
+    font-size: 22px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .canvas-container {
+    height: 150px;
+  }
+  
+  .placeholder-main {
+    font-size: 14px;
+  }
+  
+  .signature-card {
+    min-width: 100px;
+  }
+}
+
+/* 작은 화면에서 도구 배치 최적화 */
+@media (max-width: 650px) {
+  .tool-group {
+    gap: 4px;
+    padding: 8px;
+  }
+  
+  .tool-label {
+    font-size: 9px;
+    margin: 0 2px;
+  }
+  
+  .pen-btn {
+    padding: 2px 4px;
+    font-size: 7px;
+  }
+  
+  .pen-icon {
+    font-size: 8px;
+  }
+  
+  .stroke-btn, .color-btn {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+@media (max-width: 500px) {
+  .tool-group {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 4px;
+  }
+}
+
+/* 매우 작은 높이 화면 대응 */
+@media (max-height: 700px) {
+  .canvas-container {
+    height: 120px;
+  }
+  
+  .header {
+    padding: 8px 16px;
+  }
+  
+  .title {
+    font-size: 20px;
   }
 }
