@@ -178,47 +178,51 @@ const SignatureKiosk = () => {
 
         <div className="toolbar">
           <div className="tool-group">
-            <span className="tool-label">펜 종류</span>
-            {penTypes.map((pen) => (
-              <button
-                key={pen.id}
-                onClick={() => setCurrentPenType(pen.id)}
-                className={`pen-btn ${currentPenType === pen.id ? 'active' : ''}`}
-              >
-                <span className="pen-icon">{pen.icon}</span>
-                {pen.name}
-              </button>
-            ))}
-            
-            <span className="tool-label">굵기</span>
-            {strokeSizes.map((size) => (
-              <button
-                key={size}
-                onClick={() => setCurrentStroke(size)}
-                className={`stroke-btn ${currentStroke === size ? 'active' : ''}`}
-              >
-                <div 
-                  className={`stroke-indicator ${currentStroke === size ? 'active-indicator' : ''}`}
+            <div className="tool-section">
+              <span className="tool-label">펜 종류</span>
+              {penTypes.map((pen) => (
+                <button
+                  key={pen.id}
+                  onClick={() => setCurrentPenType(pen.id)}
+                  className={`pen-btn ${currentPenType === pen.id ? 'active' : ''}`}
+                >
+                  <span className="pen-icon">{pen.icon}</span>
+                  {pen.name}
+                </button>
+              ))}
+            </div>
+            <div className="tool-section">
+              <span className="tool-label">굵기</span>
+              {strokeSizes.map((size) => (
+                <button
+                  key={size}
+                  onClick={() => setCurrentStroke(size)}
+                  className={`stroke-btn ${currentStroke === size ? 'active' : ''}`}
+                >
+                  <div 
+                    className={`stroke-indicator ${currentStroke === size ? 'active-indicator' : ''}`}
+                    style={{ 
+                      width: `${Math.min(size + 2, 16)}px`, 
+                      height: `${Math.min(size + 2, 16)}px` 
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+            <div className="tool-section">
+              <span className="tool-label">색상</span>
+              {colors.map((color) => (
+                <button
+                  key={color}
+                  onClick={() => setCurrentColor(color)}
+                  className={`color-btn ${currentColor === color ? 'active' : ''}`}
                   style={{ 
-                    width: `${Math.min(size + 2, 16)}px`, 
-                    height: `${Math.min(size + 2, 16)}px` 
+                    backgroundColor: color,
+                    boxShadow: currentColor === color ? `0 0 15px ${color}40` : 'none'
                   }}
                 />
-              </button>
-            ))}
-            
-            <span className="tool-label">색상</span>
-            {colors.map((color) => (
-              <button
-                key={color}
-                onClick={() => setCurrentColor(color)}
-                className={`color-btn ${currentColor === color ? 'active' : ''}`}
-                style={{ 
-                  backgroundColor: color,
-                  boxShadow: currentColor === color ? `0 0 15px ${color}40` : 'none'
-                }}
-              />
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
