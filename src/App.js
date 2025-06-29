@@ -28,7 +28,7 @@ const SignatureKiosk = () => {
   ];
 
   const strokeSizes = [2, 4, 8, 12];
-  const colors = ['#D4AF37', '#FFFFFF', '#DC2626', '#3B82F6'];
+  const colors = ['#D4AF37', '#000000', '#DC2626', '#3B82F6'];
 
   useEffect(() => {
     const canvas = canvasRef.current;
