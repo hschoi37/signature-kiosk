@@ -8,18 +8,7 @@ const SignatureKiosk = () => {
   const [currentColor, setCurrentColor] = useState('#D4AF37');
   const [currentPenType, setCurrentPenType] = useState('pen');
   const [currentStroke, setCurrentStroke] = useState(3);
-  const [savedSignatures, setSavedSignatures] = useState([
-    {
-      id: 1,
-      data: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0yMCA0MEM0MCAyMCA4MCA2MCAyMCA0MEMxNjAgMjAgMTgwIDYwIDE4MCA0MCIgc3Ryb2tlPSIjRDRBRjM3IiBzdHJva2Utd2lkdGg9IjMiIGZpbGw9Im5vbmUiLz48L3N2Zz4=',
-      timestamp: '2025. 03. 15. 오후 2:30'
-    },
-    {
-      id: 2,
-      data: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiB2aWV3Qm94PSIwIDAgMjAwIDgwIiBmaWxsPSJub25lIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjx0ZXh0IHg9IjUwIiB5PSI1MCIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjRDRBRjM3Ij5UWEM8L3RleHQ+PC9zdmc+',
-      timestamp: '2025. 03. 15. 오후 3:15'
-    }
-  ]);
+  const [savedSignatures, setSavedSignatures] = useState([]);
 
   const penTypes = [
     { id: 'pen', name: '펜', icon: '✒️' },
@@ -259,7 +248,7 @@ const SignatureKiosk = () => {
 
         <div className="button-section">
           <button onClick={clearCanvas} className="clear-btn">
-            <Trash2 style={{ width: '16px', height: '16px' }} />
+            <Trash2 style={{ width: '16px', height: '16px', color: 'white' }} />
             지우기
           </button>
           <button onClick={saveSignature} className="save-btn">

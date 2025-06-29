@@ -113,6 +113,7 @@
   align-items: center;
   gap: 2px;
   white-space: nowrap;
+  margin-right: 10px;
 }
 
 .pen-btn:hover {
@@ -123,6 +124,10 @@
   background: #D4AF37;
   color: black;
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.pen-btn:last-child {
+  margin-right: 0;
 }
 
 .pen-icon {
@@ -140,6 +145,7 @@
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-right: 10px;
 }
 
 .stroke-btn:hover {
@@ -149,6 +155,10 @@
 .stroke-btn.active {
   background: #D4AF37;
   box-shadow: 0 4px 12px rgba(212, 175, 55, 0.3);
+}
+
+.stroke-btn:last-child {
+  margin-right: 0;
 }
 
 .stroke-indicator {
@@ -167,6 +177,7 @@
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease;
+  margin-right: 10px;
 }
 
 .color-btn:hover {
@@ -176,6 +187,10 @@
 .color-btn.active {
   border-color: black;
   transform: scale(1.1);
+}
+
+.color-btn:last-child {
+  margin-right: 0;
 }
 
 /* 서명 캔버스 */
@@ -199,7 +214,7 @@
   position: relative;
   width: 100%;
   height: 180px;
-  background: black;
+  background: white;
   border: 3px solid #D4AF37;
   border-radius: 12px;
   box-shadow: 0 15px 30px -12px rgba(0, 0, 0, 0.5);
@@ -213,7 +228,7 @@
   height: 100%;
   border-radius: 12px;
   cursor: crosshair;
-  background: black;
+  background: white;
   touch-action: none;
 }
 
@@ -283,7 +298,8 @@
 
 .clear-btn {
   background: rgba(31, 41, 55, 0.8);
-  color: black;
+  color: white;
+  fill: white;
   padding: 8px 12px;
   border-radius: 8px;
   font-weight: 500;
@@ -337,7 +353,7 @@
 .signatures-title {
   font-size: 14px;
   font-weight: 300;
-  color: #D4AF37;
+  color: #fff;
   margin-bottom: 8px;
   letter-spacing: 0.2em;
   text-align: center;
